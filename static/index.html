@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akıllı Restoran Menüsü</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-emerald-600">Kerem'in Mutfağı 🍽️</h1>
+      <span class="text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-medium">Yapay Zeka Destekli Menü</span>
+    </div>
+  </header>
+
+  <!-- Ana İçerik -->
+  <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <!-- Sol Taraf: Menü Kartları (2 Kolon) -->
+    <section class="md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4 text-gray-700">Tüm Menü</h2>
+      <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- JS ile doldurulacak -->
+      </div>
+    </section>
+
+    <!-- Sağ Taraf: AI Ajan Sohbet Kutusu (Sprint 2'de LLM'e bağlanacak) -->
+    <aside class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-[520px]">
+      <div class="border-b pb-3 mb-3">
+        <h3 class="font-bold text-gray-800 flex items-center gap-2">
+          <span>🤖</span> Akıllı Sipariş Asistanı
+        </h3>
+        <p class="text-xs text-gray-500">Alerjilerinizi veya ne aşerdiğinizi yazın!</p>
+      </div>
+
+      <!-- Mesaj Alanı -->
+      <div id="chat-box" class="flex-1 overflow-y-auto space-y-3 pr-1 text-sm">
+        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg text-xs">
+          Merhaba! Ben menü danışmanınız. "Karamelli bir tatlı istiyorum ama fıstık alerjim var" gibi isteklerinizi bana sorabilirsiniz.
+        </div>
+      </div>
+
+      <!-- Giriş Formu -->
+      <form id="chat-form" class="mt-4 flex gap-2">
+        <input 
+          id="user-input"
+          type="text" 
+          placeholder="İsteğinizi yazın..." 
+          class="flex-1 border rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          required
+        />
+        <button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-emerald-700 transition">
+          Gönder
+        </button>
+      </form>
+    </aside>
+
+  </main>
+
+  <script>
+    // Menüyü API'den çekip ekrana basma
+    async function fetchMenu() {
+      const res = await fetch('/api/menu');
+      const items = await res.json();
+      const container = document.getElementById('menu-container');
+      
+      container.innerHTML = items.map(item => `
+        <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-bold text-gray-800">${item.name}</h3>
+              <span class="text-emerald-600 font-bold">${item.price} ₺</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-3">${item.description}</p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1 mb-3">
+              ${item.allergens.map(a => `<span class="text-[10px] bg-red-50 text-red-600 px-2 py-0.5 rounded">⚠️ ${a}</span>`).join('')}
+              ${item.tags.map(t => `<span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded">#${t}</span>`).join('')}
+            </div>
+            <button class="w-full py-1.5 bg-gray-100 hover:bg-emerald-50 hover:text-emerald-700 text-gray-700 text-xs font-semibold rounded-lg transition">
+              Sepete Ekle
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    fetchMenu();
+  </script>
+</body>
+</html>

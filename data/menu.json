@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Karamelli Trileçe",
+    "category": "Tatlı",
+    "price": 110,
+    "description": "Karamel soslu, bol sütlü hafif Balkan tatlısı.",
+    "allergens": ["süt", "gluten"],
+    "tags": ["karamel", "hafif", "soğuk", "tatlı"]
+  },
+  {
+    "id": 2,
+    "name": "Fıstıklı Baklava",
+    "category": "Tatlı",
+    "price": 180,
+    "description": "Gaziantep usulü bol fıstıklı çıtır baklava.",
+    "allergens": ["gluten", "fıstık", "süt"],
+    "tags": ["şerbetli", "fıstık", "tatlı"]
+  },
+  {
+    "id": 3,
+    "name": "Izgara Tavuk Şiş",
+    "category": "Ana Yemek",
+    "price": 240,
+    "description": "Özel baharatlarla marine edilmiş tavuk göğsü, pilav ile.",
+    "allergens": [],
+    "tags": ["tavuk", "protein", "sıcak", "ızgara"]
+  },
+  {
+    "id": 4,
+    "name": "Karamel Frappe",
+    "category": "İçecek",
+    "price": 95,
+    "description": "Buzlu espresso, karamel şurubu ve krema.",
+    "allergens": ["süt"],
+    "tags": ["karamel", "soğuk", "kahve"]
+  },
+  {
+    "id": 5,
+    "name": "Mercimek Çorbası",
+    "category": "Başlangıç",
+    "price": 70,
+    "description": "Tereyağlı ve limonlu klasik süzme mercimek.",
+    "allergens": ["süt"],
+    "tags": ["çorba", "sıcak"]
+  }
+]
